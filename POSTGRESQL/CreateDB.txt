@@ -1,0 +1,17 @@
+-- Table: public.users
+
+-- DROP TABLE public.users;
+
+CREATE TABLE public.users
+(
+    login "char" NOT NULL,
+    "userID" integer NOT NULL,
+    CONSTRAINT users_pkey PRIMARY KEY ("userID")
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+ALTER TABLE public.users
+    OWNER to postgres;

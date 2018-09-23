@@ -19,6 +19,6 @@ from django.conf.urls import url, include
 from core import urls as core_urls
 from core.views import index
 urlpatterns = [
-    path('core', include(core_urls)),
+    path('core/', include(core_urls)),
     path('', index, name=""),
     ]

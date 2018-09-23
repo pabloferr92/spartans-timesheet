@@ -1,7 +1,7 @@
 from django.db import models
 
 class Users(models.Model):
-    login = models.TextField()  # This field type is a guess.
+    ulogin = models.CharField(db_column='uLogin')
     userid = models.IntegerField(db_column='userID', primary_key=True)  # Field name made lowercase.
 
     class Meta:
@@ -10,4 +10,4 @@ class Users(models.Model):
 
     
     def __str__(self):
-        return self.login
+        return self.ulogin

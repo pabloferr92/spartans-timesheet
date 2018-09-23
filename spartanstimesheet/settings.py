@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'core'
+    'core',
+    'bootstrap4',
 ]
 
 MIDDLEWARE = [
@@ -73,19 +74,19 @@ WSGI_APPLICATION = 'spartanstimesheet.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
-
+'''
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'timesheet',
         # 'NAME': os.path.join(BASE_DIR, 'mydb'),
         'USER': 'postgres',
-        'PASSWORD': 'abc321',
+        'PASSWORD': '123456',
         'HOST': '127.0.0.1',
         'PORT': '', # 8000 is default
     }
 }
-
+'''
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators

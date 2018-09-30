@@ -78,7 +78,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'mysql.connector.django',
 #        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'ts',
+        'NAME': 'timesheet',
         'USER': 'root',
         'PASSWORD': 'P@ssword1',
         'HOST': 'localhost',

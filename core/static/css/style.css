@@ -11,7 +11,7 @@ footer {
     align-items: center;
 }
 
-.form-signin .btn {
+.form-login .btn {
     font-size: 80%;
     border-radius: 5rem;
     letter-spacing: .1rem;
@@ -20,10 +20,14 @@ footer {
     transition: all 0.2s;
 }
 
-.card-signin {
+.card-login {
     border: 0;
     border-radius: 1rem;
     box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.699);
+}
+
+.card-signin {
+    border-radius: 1rem;
 }
 
 .form-label-group {

@@ -8,19 +8,19 @@ SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
 
 -- -----------------------------------------------------
--- Schema mydb
+-- Schema timesheet
 -- -----------------------------------------------------
 
 -- -----------------------------------------------------
--- Schema mydb
+-- Schema timesheet
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `mydb` DEFAULT CHARACTER SET utf8 ;
-USE `mydb` ;
+CREATE SCHEMA IF NOT EXISTS `timesheet` DEFAULT CHARACTER SET utf8mb4;
+USE `timesheet` ;
 
 -- -----------------------------------------------------
--- Table `mydb`.`perfil`
+-- Table `timesheet`.`perfil`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`perfil` (
+CREATE TABLE IF NOT EXISTS `timesheet`.`perfil` (
   `perfil_id` INT NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(100) NOT NULL,
   `criado_por` VARCHAR(100) NOT NULL,
@@ -32,9 +32,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`usuario`
+-- Table `timesheet`.`usuario`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`usuario` (
+CREATE TABLE IF NOT EXISTS `timesheet`.`usuario` (
   `usuario_id` INT NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(100) NOT NULL,
   `telefone` VARCHAR(12) NULL,
@@ -50,16 +50,16 @@ CREATE TABLE IF NOT EXISTS `mydb`.`usuario` (
   INDEX `fk_usuario_perfil_idx` (`perfil_id` ASC) VISIBLE,
   CONSTRAINT `fk_usuario_perfil`
     FOREIGN KEY (`perfil_id`)
-    REFERENCES `mydb`.`perfil` (`perfil_id`)
+    REFERENCES `timesheet`.`perfil` (`perfil_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`cliente`
+-- Table `timesheet`.`cliente`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`cliente` (
+CREATE TABLE IF NOT EXISTS `timesheet`.`cliente` (
   `cliente_id` INT NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(100) NOT NULL,
   `criado_por` VARCHAR(100) NOT NULL,
@@ -71,9 +71,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`squad`
+-- Table `timesheet`.`squad`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`squad` (
+CREATE TABLE IF NOT EXISTS `timesheet`.`squad` (
   `squad_id` INT NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(100) NOT NULL,
   `administrador_id` INT NOT NULL,
@@ -85,16 +85,16 @@ CREATE TABLE IF NOT EXISTS `mydb`.`squad` (
   INDEX `fk_Squad_usuario1_idx` (`administrador_id` ASC) VISIBLE,
   CONSTRAINT `fk_Squad_usuario1`
     FOREIGN KEY (`administrador_id`)
-    REFERENCES `mydb`.`usuario` (`usuario_id`)
+    REFERENCES `timesheet`.`usuario` (`usuario_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`projeto`
+-- Table `timesheet`.`projeto`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`projeto` (
+CREATE TABLE IF NOT EXISTS `timesheet`.`projeto` (
   `projeto_id` INT NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(100) NOT NULL,
   `cliente_id` INT NOT NULL,
@@ -108,21 +108,21 @@ CREATE TABLE IF NOT EXISTS `mydb`.`projeto` (
   INDEX `fk_projeto_squad1_idx` (`squad_id` ASC) VISIBLE,
   CONSTRAINT `fk_Projeto_Cliente1`
     FOREIGN KEY (`cliente_id`)
-    REFERENCES `mydb`.`cliente` (`cliente_id`)
+    REFERENCES `timesheet`.`cliente` (`cliente_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_projeto_squad1`
     FOREIGN KEY (`squad_id`)
-    REFERENCES `mydb`.`squad` (`squad_id`)
+    REFERENCES `timesheet`.`squad` (`squad_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`membros_squad`
+-- Table `timesheet`.`membros_squad`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`membros_squad` (
+CREATE TABLE IF NOT EXISTS `timesheet`.`membros_squad` (
   `membros_squad_id` INT NOT NULL AUTO_INCREMENT,
   `squad_id` INT NOT NULL,
   `usuario_id` INT NOT NULL,
@@ -135,24 +135,24 @@ CREATE TABLE IF NOT EXISTS `mydb`.`membros_squad` (
   INDEX `fk_membros_squad_usuario1_idx` (`usuario_id` ASC) VISIBLE,
   CONSTRAINT `fk_membros_squad_Squad1`
     FOREIGN KEY (`squad_id`)
-    REFERENCES `mydb`.`squad` (`squad_id`)
+    REFERENCES `timesheet`.`squad` (`squad_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_membros_squad_usuario1`
     FOREIGN KEY (`usuario_id`)
-    REFERENCES `mydb`.`usuario` (`usuario_id`)
+    REFERENCES `timesheet`.`usuario` (`usuario_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`categoria`
+-- Table `timesheet`.`categoria`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`categoria` (
+CREATE TABLE IF NOT EXISTS `timesheet`.`categoria` (
   `categoria_id` INT NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(50) NOT NULL,
-  `descricao` VARCHAR(5000) NULL,
+  `descricao` BLOB(5000) NULL,
   `criado_por` VARCHAR(100) NOT NULL,
   `data_criacao` DATETIME NOT NULL,
   `atualizado_por` VARCHAR(100) NOT NULL,
@@ -162,9 +162,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`lancamento_horas`
+-- Table `timesheet`.`lancamento_horas`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`lancamento_horas` (
+CREATE TABLE IF NOT EXISTS `timesheet`.`lancamento_horas` (
   `lancamento_horas_id` INT NOT NULL AUTO_INCREMENT,
   `projeto_id` INT NOT NULL,
   `cliente_id` INT NOT NULL,
@@ -172,7 +172,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`lancamento_horas` (
   `categoria_id` INT NOT NULL,
   `data_inicio` DATETIME NOT NULL,
   `data_fim` DATETIME NULL,
-  `descricao` VARCHAR(5000) NULL,
+  `descricao` BLOB(5000) NULL,
   `criado_por` VARCHAR(100) NOT NULL,
   `data_criacao` DATETIME NOT NULL,
   `atualizado_por` VARCHAR(100) NOT NULL,
@@ -184,22 +184,22 @@ CREATE TABLE IF NOT EXISTS `mydb`.`lancamento_horas` (
   INDEX `fk_lancamento_horas_categoria1_idx` (`categoria_id` ASC) VISIBLE,
   CONSTRAINT `fk_lancamento_horas_projeto1`
     FOREIGN KEY (`projeto_id`)
-    REFERENCES `mydb`.`projeto` (`projeto_id`)
+    REFERENCES `timesheet`.`projeto` (`projeto_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_lancamento_horas_cliente1`
     FOREIGN KEY (`cliente_id`)
-    REFERENCES `mydb`.`cliente` (`cliente_id`)
+    REFERENCES `timesheet`.`cliente` (`cliente_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_lancamento_horas_usuario1`
     FOREIGN KEY (`usuario_id`)
-    REFERENCES `mydb`.`usuario` (`usuario_id`)
+    REFERENCES `timesheet`.`usuario` (`usuario_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_lancamento_horas_categoria1`
     FOREIGN KEY (`categoria_id`)
-    REFERENCES `mydb`.`categoria` (`categoria_id`)
+    REFERENCES `timesheet`.`categoria` (`categoria_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;

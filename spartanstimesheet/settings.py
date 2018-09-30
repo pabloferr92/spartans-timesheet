@@ -74,20 +74,20 @@ WSGI_APPLICATION = 'spartanstimesheet.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
-'''
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'timesheet',
-        # 'NAME': os.path.join(BASE_DIR, 'mydb'),
-        'USER': 'postgres',
-        'PASSWORD': '123456',
-        'HOST': '127.0.0.1',
-        'PORT': '', # 8000 is default
+        'ENGINE': 'mysql.connector.django',
+#        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'ts',
+        'USER': 'root',
+        'PASSWORD': 'P@ssword1',
+        'HOST': 'localhost',
+        'CHARSET': 'utf8mb4',
+        'COLLATION': 'utf8mb4_unicode_ci',
+        'PORT': '3306',
+        'OPTIONS': {'sql_mode': 'TRADITIONAL', 'use_pure': True, 'use_unicode': True, 'charset': 'utf8mb4',
+                    'collation': 'utf8mb4_general_ci','raise_on_warnings' : False},}
     }
-}
-'''
-
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
 

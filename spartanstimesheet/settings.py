@@ -88,6 +88,7 @@ DATABASES = {
         'OPTIONS': {'sql_mode': 'TRADITIONAL', 'use_pure': True, 'use_unicode': True, 'charset': 'utf8mb4',
                     'collation': 'utf8mb4_general_ci','raise_on_warnings':False},
     }
+}
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
 

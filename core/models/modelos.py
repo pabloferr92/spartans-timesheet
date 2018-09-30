@@ -1,17 +1,10 @@
-# This is an auto-generated Django model module.
-# You'll have to do the following manually to clean this up:
-#   * Rearrange models' order
-#   * Make sure each model has one field with primary_key=True
-#   * Make sure each ForeignKey has `on_delete` set to the desired behavior.
-#   * Remove `managed = False` lines if you wish to allow Django to create, modify, and delete the table
-# Feel free to rename the models, but don't rename db_table values or field names.
 from django.db import models
 
 
 class Categoria(models.Model):
     categoria_id = models.AutoField(primary_key=True)
     nome = models.CharField(max_length=50)
-    descricao = models.TextField(blank=True, null=True)
+    descricao = models.CharField(max_length=5000, blank=True, null=True)
     criado_por = models.CharField(max_length=100)
     data_criacao = models.DateTimeField()
     atualizado_por = models.CharField(max_length=100)
@@ -43,7 +36,7 @@ class LancamentoHoras(models.Model):
     categoria = models.ForeignKey(Categoria, models.DO_NOTHING)
     data_inicio = models.DateTimeField()
     data_fim = models.DateTimeField(blank=True, null=True)
-    descricao = models.TextField(blank=True, null=True)
+    descricao = models.CharField(max_length=5000, blank=True, null=True)
     criado_por = models.CharField(max_length=100)
     data_criacao = models.DateTimeField()
     atualizado_por = models.CharField(max_length=100)
